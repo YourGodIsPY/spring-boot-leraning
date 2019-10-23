@@ -3,17 +3,47 @@
 <mapper namespace="com.ypan.sprinbootweb1.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.ypan.sprinbootweb1.entities.User">
-        <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="userName" jdbcType="VARCHAR" property="userName" />
-        <result column="passWord" jdbcType="VARCHAR" property="passWord" />
-        <result column="realName" jdbcType="VARCHAR" property="realName" />
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        <result column="passWord" jdbcType="VARCHAR" property="passWord"/>
+        <result column="realName" jdbcType="VARCHAR" property="realName"/>
     </resultMap>
 
+    <select id="selectUserById" resultType="com.ypan.sprinbootweb1.entities.User" parameterType="Integer">
+        select * from tb_user where id = #{id}
+    </select>
     <select id="selectAllUser" resultType="com.ypan.sprinbootweb1.entities.User">
         select * from tb_user
     </select>
-
-    <select id="selectUserByNamePwd" resultType="com.ypan.sprinbootweb1.entities.User" parameterType="com.ypan.sprinbootweb1.entities.User">
+    <select id="selectUserByNamePwd" resultType="com.ypan.sprinbootweb1.entities.User"
+            parameterType="com.ypan.sprinbootweb1.entities.User">
           select * from tb_user where userName = #{userName} and  passWord = #{passWord}
     </select>
+
+    <insert id="addUser" parameterType="com.ypan.sprinbootweb1.entities.User">
+        insert into tb_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null and userName != ''">
+                userName,
+            </if>
+            <if test="passWord != null and passWord != ''">
+                passWord,
+            </if>
+            <if test="realName != null and realName != ''">
+                realName,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null and userName != ''">
+                #{userName},
+            </if>
+            <if test="passWord != null and passWord != ''">
+                #{passWord},
+            </if>
+            <if test="realName != null and realName != ''">
+                #{realName},
+            </if>
+        </trim>
+        values()
+    </insert>
 </mapper>

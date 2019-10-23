@@ -13,7 +13,7 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
-    
+
     @Override
     public List<User> selectAllUser() {
         return userMapper.selectAllUser();
@@ -22,5 +22,15 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User selectUserByNamePwd(User user) {
         return userMapper.selectUserByNamePwd(user);
+    }
+
+    @Override
+    public User addUser(User user) {
+        return userMapper.addUser(user);
+    }
+
+    @Override
+    public User selectUserById(Integer userId) {
+        return userMapper.selectUserById(userId);
     }
 }

@@ -8,6 +8,11 @@ public interface IUserService {
 
     List<User> selectAllUser();
 
-    User selectUserByNamePwd(User user );
+    User selectUserByNamePwd(User user);
+
+    User addUser(User user);
+
+    User selectUserById(Integer userId);
+
 
 }

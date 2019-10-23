@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.UUID;
@@ -32,11 +29,16 @@ public class UserController {
      *
      * @return
      */
-    @GetMapping("/getAllUser")
+    @GetMapping("/users")
     @ResponseBody
     public JsonResult getAllUser() {
+        return JsonResult.ok("cg", userService.selectAllUser());
+    }
 
-        return JsonResult.ok(userService.selectAllUser());
+    @GetMapping("/users/{id}")
+    @ResponseBody
+    public JsonResult getUserById(@PathVariable Integer id) {
+        return JsonResult.ok("cg", userService.selectUserById(id));
     }
 
     @PostMapping("/login")
