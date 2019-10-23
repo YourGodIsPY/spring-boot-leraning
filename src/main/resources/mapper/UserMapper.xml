@@ -20,17 +20,17 @@
           select * from tb_user where userName = #{userName} and  passWord = #{passWord}
     </select>
 
-    <insert id="addUser" parameterType="com.ypan.sprinbootweb1.entities.User">
+    <insert id="addUser" parameterType="Integer">
         insert into tb_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userName != null and userName != ''">
-                userName,
+                username,
             </if>
             <if test="passWord != null and passWord != ''">
-                passWord,
+                password,
             </if>
             <if test="realName != null and realName != ''">
-                realName,
+                realname,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -44,6 +44,23 @@
                 #{realName},
             </if>
         </trim>
-        values()
     </insert>
+
+    <delete id="deleteUser" parameterType="Integer">
+        delete from tb_user where id =#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.ypan.sprinbootweb1.entities.User">
+        update tb_user set
+        <if test="userName != null and userName != ''">
+            username = #{userName},
+        </if>
+        <if test="passWord != null and passWord != ''">
+            password = #{passWord},
+        </if>
+        <if test="realName != null and realName != ''">
+            realname = #{realName},
+        </if>
+        where id = #{id}
+    </update>
 </mapper>

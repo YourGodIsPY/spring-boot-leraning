@@ -10,9 +10,13 @@ public interface IUserService {
 
     User selectUserByNamePwd(User user);
 
-    User addUser(User user);
+    boolean addUser(User user);
 
     User selectUserById(Integer userId);
+
+    boolean deleteUser(Integer userId);
+
+    User updateUser(User user);
 
 
 }

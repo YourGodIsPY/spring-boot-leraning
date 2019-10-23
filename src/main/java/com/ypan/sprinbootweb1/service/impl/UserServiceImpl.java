@@ -25,12 +25,22 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User addUser(User user) {
+    public boolean addUser(User user) {
         return userMapper.addUser(user);
     }
 
     @Override
     public User selectUserById(Integer userId) {
         return userMapper.selectUserById(userId);
+    }
+
+    @Override
+    public boolean deleteUser(Integer userId) {
+        return userMapper.deleteUser(userId);
+    }
+
+    @Override
+    public User updateUser(User user) {
+        return userMapper.updateUser(user);
     }
 }
