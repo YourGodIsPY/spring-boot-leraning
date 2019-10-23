@@ -41,6 +41,18 @@ public class UserController {
         return JsonResult.ok("cg", userService.selectUserById(id));
     }
 
+    @DeleteMapping("/users/{id}")
+    @ResponseBody
+    public JsonResult delUserById(@PathVariable Integer id) {
+        return JsonResult.ok("cg", userService.deleteUser(id));
+    }
+
+    @PostMapping("/users")
+    @ResponseBody
+    public JsonResult addUser(@RequestBody User user) {
+        return JsonResult.ok("cg", userService.addUser(user));
+    }
+
     @PostMapping("/login")
     public String userLogin(User user, Model m, HttpSession session) {
         if (null == user) {
